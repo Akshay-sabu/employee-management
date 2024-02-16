@@ -21,12 +21,13 @@ public class PayRollServiceImpl implements PayRollService {
     @Autowired
     Mapper mapper;
     @Override
-    public PaySlip getPaySlip(Long empId, String payPeriod){
-        Employee employee=employeeRepository.findById(empId).orElseThrow(()-> new CompanyException(ResCodes.EMPLOYEE_NOT_FOUND));
+    public PaySlip getPaySlip(String empId, String payPeriod){
+        Employee employee=employeeRepository.findById("").orElseThrow(()-> new CompanyException(ResCodes.EMPLOYEE_NOT_FOUND));
         Payroll payroll=payrollRepository.getPayPeriodDetails(payPeriod,employee).orElseThrow(()->new CompanyException(ResCodes.SALARY_DETAILS_NOT_FOUND));
         PaySlip paySlip=new PaySlip();
-        paySlip.setEmployeeDTO(mapper.convertToEmployeeDTO(employee));
-        paySlip.setPayrollDTO(mapper.convertToPayRollDTO(payroll));
+//        paySlip.setEmployeeDTO(mapper.convertToEmployeeDTO(employee));
+//        paySlip.setPayrollDTO(mapper.convertToPayRollDTO(payroll));
         return paySlip;
     }
+
 }

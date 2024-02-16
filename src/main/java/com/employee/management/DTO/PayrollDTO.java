@@ -5,17 +5,19 @@ import java.util.Date;
 
 @Data
 public class PayrollDTO {
-    private Long id;
     private String payPeriod;
     private String payDate;
-    private Long employeeId;
-    private Double basic;
-    private Double houseRentAllowance;
-    private Double medicalAllowance;
-    private Double otherAllowance;
-    private Double grossEarnings;
-    private Double providentFund;
-    private Double totalDeductions;
-    private Double totalNetPayable;
+    private String employeeId;
+    private String basic;
+    private String houseRentAllowance;
+    private String medicalAllowance;
+    private String otherAllowance;
+    private String grossEarnings;
+    private String providentFund;
+    private String leaveDeduction;
+    private String totalDeductions;
+    private String totalNetPayable;
+
     private Integer totalDaysPaid;
+    private Integer totalLopDays;
 }

@@ -21,24 +21,22 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Autowired
     ModelMapper modelMapper;
     @Override
-    public EmployeeDTO getEmployee(Long id){
+    public EmployeeDTO getEmployee(String id){
        Employee employee= employeeRepository.findById(id).orElseThrow(()->new CompanyException(ResCodes.EMPLOYEE_NOT_FOUND));
       return mapper.convertToEmployeeDTO(employee);
     }
 
     @Override
     public boolean verifyUser(Long id, String password) {
-        Employee employee=employeeRepository.findById(id).orElseThrow(()->new CompanyException(ResCodes.EMPLOYEE_NOT_FOUND));
-        if(!employee.getPassword().equals(password)){
-            return false;
+        Employee employee=employeeRepository.findById("")
+                .orElseThrow(()->new CompanyException(ResCodes.EMPLOYEE_NOT_FOUND));
+        if(employee.getPassword().equals(password) && employee.getStatus().getName().equals("active")){
+            return true;
         }
-        return true;
+        if(employee.getStatus().getName().equals("inactive")){
+            throw new CompanyException(ResCodes.INACTIVE_EMPLOYEE);
+        }
+        return false;
     }
 
-    @Override
-    public EmployeeDTO addNewEmployee(EmployeeDTO employeeDTO){
-        Employee employee=mapper.convertToEmployeeEntity(employeeDTO);
-        Employee savedEmployee = employeeRepository.save(employee);
-        return mapper.convertToEmployeeDTO(savedEmployee);
-    }
 }

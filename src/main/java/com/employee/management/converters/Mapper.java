@@ -6,6 +6,7 @@ import com.employee.management.exception.CompanyException;
 import com.employee.management.exception.ResCodes;
 import com.employee.management.models.Employee;
 import com.employee.management.models.Payroll;
+import com.employee.management.models.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,31 +19,46 @@ public class Mapper {
     public EmployeeDTO convertToEmployeeDTO(Employee employee){
         EmployeeDTO employeeDTO=new EmployeeDTO();
         if(employee!=null){
+            employeeDTO.setRoles(employee.getRoles()
+                    .stream()
+                    .map(Role::getName)
+                    .toList()
+            );
             employeeDTO.setEmployeeID(employee.getEmployeeID());
             employeeDTO.setEmployeeName(employee.getEmployeeName());
             employeeDTO.setDesignation(employee.getDesignation());
+            employeeDTO.setEmail(employee.getEmail());
             employeeDTO.setLocation(employee.getLocation());
             employeeDTO.setBankName(employee.getBankName());
             employeeDTO.setAccountNo(employee.getAccountNo());
+            employeeDTO.setStatus(employee.getStatus().getName());
             employeeDTO.setDateOfJoin(dateConverter.localDateTimeToStringConverter(employee.getDateOfJoin()));
         }
         return employeeDTO;
     }
-    public PayrollDTO convertToPayRollDTO(Payroll payroll) {
-        PayrollDTO dto = new PayrollDTO();
-        dto.setId(payroll.getId());
-        dto.setPayPeriod(payroll.getPayPeriod());
-        dto.setPayDate(dateConverter.localDateTimeToStringConverter(payroll.getPayDate()));
-        dto.setEmployeeId(payroll.getEmployee().getEmployeeID());
-        dto.setBasic(payroll.getBasic());
-        dto.setHouseRentAllowance(payroll.getHouseRentAllowance());
-        dto.setMedicalAllowance(payroll.getMedicalAllowance());
-        dto.setOtherAllowance(payroll.getOtherAllowance());
-        dto.setGrossEarnings(payroll.getGrossEarnings());
-        dto.setProvidentFund(payroll.getProvidentFund());
-        dto.setTotalDeductions(payroll.getTotalDeductions());
-        dto.setTotalNetPayable(payroll.getTotalNetPayable());
-        return dto;
+//    public PayrollDTO convertToPayRollDTO(Payroll payroll) {
+//        PayrollDTO dto = new PayrollDTO();
+//        dto.setId(payroll.getId());
+//        dto.setPayPeriod(payroll.getPayPeriod());
+//        dto.setPayDate(dateConverter.localDateTimeToStringConverter(payroll.getPayDate()));
+//        dto.setEmployeeId(payroll.getEmployee().getEmployeeID());
+//        dto.setBasic(payroll.getBasic());
+//        dto.setHouseRentAllowance(payroll.getHouseRentAllowance());
+//        dto.setMedicalAllowance(payroll.getMedicalAllowance());
+//        dto.setOtherAllowance(payroll.getOtherAllowance());
+//        dto.setGrossEarnings(payroll.getGrossEarnings());
+//        dto.setProvidentFund(payroll.getProvidentFund());
+//        dto.setTotalDeductions(payroll.getTotalDeductions());
+//        dto.setTotalNetPayable((double) Math.round(payroll.getTotalNetPayable()));
+//        dto.setTotalDaysPaid(payroll.getTotalPaidDays());
+//        dto.setTotalLopDays(payroll.getTotalLopDays());
+//        dto.setLeaveDeduction(payroll.getLeaveDeduction());
+//        return dto;
+//    }
+
+    public Payroll convertToPayroll(PayrollDTO payrollDTO){
+        Payroll payroll=new Payroll();
+
     }
     public Employee convertToEmployeeEntity(EmployeeDTO employeeDTO) {
         Employee employee = new Employee();
@@ -55,6 +71,7 @@ public class Mapper {
         employee.setBankName(employeeDTO.getBankName());
         employee.setAccountNo(employeeDTO.getAccountNo());
         employee.setPassword(employeeDTO.getPassword());
+        employee.setEmail(employeeDTO.getEmail());
         employee.setDateOfJoin(dateConverter.stringToLocalDateTimeConverter(employeeDTO.getDateOfJoin()));
         return employee;
     }

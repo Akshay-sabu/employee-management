@@ -9,7 +9,11 @@ public enum ResCodes {
     SALARY_DETAILS_NOT_FOUND("1001","Salary details not found"),
     PAYSLIP_NOT_AVAILABLE("1002","PaySlip not available for this month"),
     INVALID_ID_AND_PASSWORD("1003","Incorrect user id or password"),
-    INVALID_EMPLOYEE_DETAILS("1004","Employee data is not complete")
+    INVALID_EMPLOYEE_DETAILS("1004","Employee data is not complete"),
+    INVALID_ROLE("1005","Role details not found"),
+    INACTIVE_EMPLOYEE("1006","Inactive Employee"),
+    INVALID_STATUS("1007","Status not found"),
+    NOT_AUTHORIZED("1008","Employee not permitted")
     ;
     private final String errorCode;
     private final String errorMsg;

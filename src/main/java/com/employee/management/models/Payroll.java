@@ -42,10 +42,19 @@ public class Payroll {
     @Column(name = "ProvidentFund")
     private Double providentFund;
 
+    @Column(name="LeaveDeduction")
+    private Double leaveDeduction;
+
     @Column(name = "TotalDeductions")
     private Double totalDeductions;
 
     @Column(name = "TotalNetPayable")
     private Double totalNetPayable;
+
+    @Column(name="TotalPaidDays")
+    private Integer totalPaidDays;
+
+    @Column(name="TotalLopDays")
+    private Integer totalLopDays;
 }
 
